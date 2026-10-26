@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Квест по ИПУ РАН</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Квест ИПУ">
+  <meta name="theme-color" content="#172b56">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="stars" class="stars" aria-hidden="true"></div>
+
+  <!-- ЭКРАН 1: старт -->
+  <section id="screen-start" class="screen">
+    <div class="start-emoji">🧠</div>
+    <h1 class="main-title">Квест по ИПУ РАН</h1>
+    <p class="subtitle">10 вопросов об институте, лабораториях и великих учёных. С подвохами — не расслабляйся!</p>
+
+    <div class="prize-line">
+      <span class="prize-line-label">🎁 Призы за результат:</span>
+      <span>🧟 Мумия</span> · <span>🍾 Открывашка</span> · <span>📱 Подставка для телефона</span>
+    </div>
+
+    <button id="btn-start" class="btn-start">🚀 Начать квест</button>
+    <div class="start-stats">
+      <div class="stat"><b id="stat-count">54</b><span>вопросов в банке</span></div>
+      <div class="stat"><b>10</b><span>вопросов на игру</span></div>
+      <div class="stat"><b>🎁</b><span>приз за результат</span></div>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 2: вопрос -->
+  <section id="screen-quiz" class="screen hidden">
+    <div class="quiz-top">
+      <span class="progress-text" id="progress-text">Вопрос 1 из 10</span>
+      <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="question-label">Вопрос</div>
+      <h2 id="q-text" class="question-text"></h2>
+
+      <div id="options" class="options"></div>
+
+      <div id="feedback" class="feedback hidden">
+        <div id="feedback-title" class="feedback-title"></div>
+        <p id="feedback-text" class="feedback-text"></p>
+        <button id="btn-next" class="btn-next">Дальше →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 3: итог -->
+  <section id="screen-result" class="screen hidden">
+    <div class="result-emoji" id="result-emoji">🏆</div>
+    <h2 class="result-title" id="result-title">Итог</h2>
+    <p class="result-score" id="result-score">Вы ответили правильно на 8 из 10</p>
+
+    <div class="prize-box">
+      <div class="prize-label">🎁 Твой приз</div>
+      <div class="prize-item" id="prize-item">Подставка для телефона</div>
+      <p class="prize-note" id="prize-note">Телефон всегда на месте — как и твои ответы.</p>
+    </div>
+
+    <div class="result-actions">
+      <button id="btn-again" class="btn-again">🔄 Ещё раз</button>
+      <button id="btn-to-start" class="btn-again btn-ghost">📋 К началу</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Квест по ИПУ РАН · Институт проблем управления им. В. А. Трапезникова РАН</span>
+  </footer>
+
+  <script src="data/questions.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>

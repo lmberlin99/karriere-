@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Распределяющая шляпа v2 — ИПУ РАН</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Шляпа ИПУ">
+  <meta name="theme-color" content="#2a1a3e">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Звёздное небо (фон) -->
+  <div id="stars" class="stars" aria-hidden="true"></div>
+
+  <!-- ЭКРАН 1: магический старт -->
+  <section id="screen-start" class="screen">
+    <div class="magic-circle" aria-hidden="true">
+      <div class="magic-ring magic-ring-1"></div>
+      <div class="magic-ring magic-ring-2"></div>
+      <div class="magic-ring magic-ring-3"></div>
+    </div>
+
+    <div class="hat-wrap">
+      <div class="spark"></div>
+      <div class="spark spark-2"></div>
+      <div class="spark spark-3"></div>
+
+      <svg class="hat-svg" viewBox="0 0 420 400" aria-hidden="true">
+        <!-- тень под шляпой -->
+        <ellipse cx="200" cy="330" rx="180" ry="44" fill="#3a2b3d" opacity=".45"/>
+        <!-- поля шляпы -->
+        <ellipse cx="200" cy="320" rx="185" ry="62" fill="#5a3a56"/>
+        <ellipse cx="200" cy="310" rx="185" ry="62" fill="#8a5f8e"/>
+        <ellipse cx="200" cy="302" rx="158" ry="48" fill="#9c6fa0"/>
+        <ellipse cx="200" cy="298" rx="158" ry="46" fill="#b489b8"/>
+        <!-- тулья -->
+        <path d="M224 36 C 198 90, 168 138, 142 182 C 122 218, 108 250, 98 288 L 302 288 C 292 250, 282 222, 268 196 C 248 162, 236 110, 224 36 Z" fill="#8a5f8e"/>
+        <!-- залом -->
+        <path d="M224 36 C 210 74, 194 116, 176 162 L 238 162 C 226 118, 222 76, 224 36 Z" fill="#9c6fa0"/>
+        <!-- тень слева -->
+        <path d="M98 288 C 138 186, 190 96, 224 36 C 212 100, 178 174, 132 288 Z" fill="#6f4a72" opacity=".55"/>
+        <!-- звезда-заклёпка -->
+        <path d="M258 178 l 6 12 13 2 -9 9 2 13 -12 -6 -12 6 2 -13 -9 -9 13 -2 Z" fill="#ffd76a"/>
+        <circle cx="258" cy="192" r="5" fill="#fff6d8"/>
+        <!-- лицо -->
+        <ellipse cx="164" cy="196" rx="15" ry="19" fill="#3d2542"/>
+        <ellipse cx="236" cy="196" rx="15" ry="19" fill="#3d2542"/>
+        <circle cx="168" cy="192" r="6" fill="#fff"/>
+        <circle cx="240" cy="192" r="6" fill="#fff"/>
+        <circle cx="170" cy="194" r="2.6" fill="#3d2542"/>
+        <circle cx="242" cy="194" r="2.6" fill="#3d2542"/>
+        <path d="M156 238 Q 200 268, 244 238" fill="none" stroke="#3d2542" stroke-width="9" stroke-linecap="round"/>
+        <path d="M150 224 Q 158 216, 166 220" fill="none" stroke="#3d2542" stroke-width="4" stroke-linecap="round"/>
+        <path d="M234 220 Q 242 216, 250 224" fill="none" stroke="#3d2542" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+
+      <div class="hat-shadow"></div>
+    </div>
+
+    <h1 class="main-title">Распределяющая шляпа <span class="v2-badge">v2</span></h1>
+    <p class="subtitle">Магическая шляпа ИПУ РАН знает, какая лаборатория твоя</p>
+
+    <button id="btn-start" class="btn-start">
+      <span class="btn-icon">✨</span>
+      <span class="btn-label">НАДЕНЬ ШЛЯПУ</span>
+      <span class="btn-icon">✨</span>
+    </button>
+    <p class="hint">нажми один раз — шляпа поколдует и всё решит</p>
+
+    <div class="start-stats">
+      <div class="stat"><b id="stat-labs">33</b><span>лаборатории</span></div>
+      <div class="stat"><b id="stat-directions">6</b><span>направлений науки</span></div>
+      <div class="stat"><b>100%</b><span>магии</span></div>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 2: загрузка -->
+  <section id="screen-loading" class="screen hidden">
+    <div class="loader-stage">
+      <div class="loader-hat">🎩</div>
+      <div class="loader-orbit orbit-1"></div>
+      <div class="loader-orbit orbit-2"></div>
+      <div class="loader-orbit orbit-3"></div>
+    </div>
+    <p id="loading-text" class="loading-text">Шляпа думает...</p>
+    <div class="loader-bar"><div id="loader-fill" class="loader-fill"></div></div>
+  </section>
+
+  <!-- ЭКРАН 3: слайд с лабораторией -->
+  <section id="screen-result" class="screen hidden">
+    <div class="result-head">
+      <p class="result-kicker">✨ Шляпа распределила тебя в ✨</p>
+      <h2 id="res-name" class="result-name"></h2>
+      <div id="res-emojis" class="result-emojis"></div>
+    </div>
+
+    <div class="result-grid">
+      <!-- левая колонка: фото + вердикт -->
+      <div class="result-left">
+        <div class="leader-card">
+          <div class="leader-photo-wrap">
+            <img id="res-photo" class="leader-photo" alt="Заведующий лабораторией" src="">
+            <div class="leader-photo-fallback" id="res-photo-fallback">🧙</div>
+          </div>
+          <div class="leader-info">
+            <div class="leader-role" id="res-role"></div>
+            <div class="leader-name" id="res-leader"></div>
+            <div class="leader-degree" id="res-degree"></div>
+          </div>
+        </div>
+
+        <div class="verdict">
+          <div class="verdict-label">🎩 Вердикт шляпы</div>
+          <p id="res-joke"></p>
+        </div>
+
+        <div class="skills-block">
+          <div class="block-title">🪄 Шляпа прокачает в тебе</div>
+          <div id="res-skills" class="chips"></div>
+        </div>
+      </div>
+
+      <!-- правая колонка: подробности -->
+      <div class="result-right">
+        <div class="info-block">
+          <div class="block-title">📖 О лаборатории</div>
+          <p id="res-description"></p>
+        </div>
+
+        <div class="info-block">
+          <div class="block-title">🧭 Научные направления</div>
+          <div id="res-directions" class="chips"></div>
+        </div>
+
+        <div class="info-block">
+          <div class="block-title">🧪 Чем ты будешь заниматься</div>
+          <ul id="res-list" class="what-list"></ul>
+        </div>
+
+        <div class="info-block facts-block">
+          <div class="block-title">💡 А ты знал?</div>
+          <div id="res-facts" class="facts"></div>
+        </div>
+
+        <div class="result-actions">
+          <a id="res-link" class="btn-link" href="#" target="_blank" rel="noopener">Подробнее на ipu.ru</a>
+          <button id="btn-again" class="btn-again">🎲 Попробовать ещё раз</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>ИПУ РАН · Институт проблем управления им. В. А. Трапезникова РАН · Версия 2</span>
+  </footer>
+
+  <script src="data/labs.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>

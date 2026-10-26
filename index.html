@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ИПУ РАН · Квест и Шляпа</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 24px;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(160deg, #0f1d3d, #241737);
+    }
+    h1 { font-size: 30px; margin-bottom: 6px; }
+    p { color: #c7d3ee; }
+    .cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
+    a.card {
+      display: block;
+      width: 280px;
+      padding: 28px 22px;
+      border-radius: 22px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      transition: transform .15s ease, background .15s ease;
+    }
+    a.card:hover { transform: translateY(-4px); background: rgba(255,255,255,.13); }
+    .card .emoji { font-size: 52px; display: block; margin-bottom: 12px; }
+    .card .name { font-weight: 900; font-size: 20px; }
+    .card .desc { font-size: 14px; color: #c7d3ee; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>ИПУ РАН</h1>
+  <p>Два интерактивных проекта для гостей</p>
+  <div class="cards">
+    <a class="card" href="квест_v3_ipad/">
+      <span class="emoji">🧠</span>
+      <span class="name">Квест по ИПУ РАН</span>
+      <span class="desc">10 вопросов с подвохами и призом</span>
+    </a>
+    <a class="card" href="интерактив_v2/">
+      <span class="emoji">🎩</span>
+      <span class="name">Распределяющая шляпа</span>
+      <span class="desc">Магия определяет твою лабораторию</span>
+    </a>
+  </div>
+</body>
+</html>
