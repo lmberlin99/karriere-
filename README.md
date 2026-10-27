@@ -2,10 +2,11 @@
 
 Статические веб-приложения, размещаемые на GitHub Pages:
 
-- [`квест_v3_ipad/`](квест_v3_ipad/) — квест по ИПУ РАН (10 вопросов, призы, версия для iPad)
+- [`квест_v3_universal/`](квест_v3_universal/) — квест по ИПУ РАН (10 вопросов, призы; телефон / iPad / ПК — одна версия)
 - [`интерактив_v2/`](интерактив_v2/) — «Распределяющая шляпа»: магия выбирает лабораторию
+- [`квест_v3_ipad/`](квест_v3_ipad/) — квест, версия для iPad (крупный интерфейс)
 
-Открыть: https://lmberlin99.github.io/karriere-/
+Открыть: https://lmberlin99.github.io/karriere/
 
 ## Как обновить
 
@@ -20,8 +21,9 @@
 
 ```
 karriere/
-├── index.html            — стартовая навигация
+├── index.html              — стартовая навигация
 ├── README.md
-├── квест_v3_ipad/        — квест (index.html, style.css, app.js, data/questions.js, sw.js…)
-└── интерактив_v2/        — шляпа (index.html, style.css, app.js, data/labs.js, assets/, sw.js…)
+├── квест_v3_universal/     — квест (телефон / iPad / ПК)
+├── квест_v3_ipad/          — квест, версия для iPad
+└── интерактив_v2/          — шляпа (index.html, style.css, app.js, data/labs.js, assets/, sw.js…)
 ```
